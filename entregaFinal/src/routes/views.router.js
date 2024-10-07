@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import ProductManager from '../dao/db/products-manager.js';
 import CartManager from '../dao/db/carts-manager.js';
+import { soloAdmin, soloUser } from '../middleware/auth.js';
+import passport from 'passport';
 
 const router = Router();
 
@@ -15,7 +17,7 @@ router.get('/register', async (req, res) => {
     res.render('register');
 });
 
-router.get('/products', async (req, res) => {
+router.get('/products', passport.authenticate('jwt', { session: false }), soloUser,  async (req, res) => {
     try {
         const { page = 1, limit = 4 } = req.query;
         const products = await productManager.getProducts({
@@ -81,7 +83,7 @@ router.get('/', async (req, res) => {
     res.render('home', { newArray });
 });
 
-router.get('/realtimeproducts', async (req, res) => {
+router.get('/realtimeproducts', passport.authenticate('jwt', { session: false }), soloAdmin, async (req, res) => {
     res.render('realtimeproducts');
 });
 
