@@ -1,4 +1,4 @@
-import ProductModel from "../models/products.model.js";
+import ProductModel from '../models/products.model.js';
 
 class ProductManager {
     async getProducts({ limit = 10, page = 1, sort, query } = {}) {
@@ -43,7 +43,7 @@ class ProductManager {
             };
 
         } catch (error) {
-            console.log("Error to get products", error);
+            console.log('Error to get products', error);
             throw error;
         }
     }
@@ -53,14 +53,14 @@ class ProductManager {
             const arrayProduct = await ProductModel.findById(id);
 
             if (!arrayProduct) {
-                console.log("Product not found");
+                console.log('Product not found');
                 return null;
             }
 
             return arrayProduct;
         }
         catch(error) {
-            console.log("Error to get product", error);
+            console.log('Error to get product', error);
             throw error;
         }
     }
@@ -72,7 +72,7 @@ class ProductManager {
             const productExists = await ProductModel.findOne({ code: code });
 
             if (productExists) {
-                console.log("Code must be unique");
+                console.log('Code must be unique');
                 return;
             }
 
@@ -92,7 +92,7 @@ class ProductManager {
             return newProduct;
         }
         catch(error) {
-            console.log("Error to add product", error);
+            console.log('Error to add product', error);
             throw error;
         }
     }
@@ -102,7 +102,7 @@ class ProductManager {
             const product = await ProductModel.findByIdAndUpdate(id, newData);
 
             if (!product) {
-                console.log("Product not found");
+                console.log('Product not found');
                 return null;
             }
 
@@ -117,7 +117,7 @@ class ProductManager {
             const deletedProduct = await ProductModel.findByIdAndDelete(id);
 
             if (!deletedProduct) {
-                console.log("Product not found");
+                console.log('Product not found');
                 return null;
             }
 

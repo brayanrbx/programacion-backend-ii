@@ -17,7 +17,7 @@ routeProducts.get('/', async (req, res, next) => {
 
         res.status(200).json({
             status: 'success',
-            payload: products,
+            payload: products.docs,
             totalPages: products.totalPages,
             prevPage: products.prevPage,
             nextPage: products.nextPage,
@@ -69,7 +69,7 @@ routeProducts.put('/:pid', async (req, res, next) => {
         const { body } = req;
         const product = await productsController.updateProduct(pid, body)
         res.status(201).json({
-            msg: "Product updated successfully",
+            msg: 'Product updated successfully',
             product
         });
     }

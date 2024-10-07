@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extend: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./src/public'));
 app.use(cookieParser());
 app.use(passport.initialize());
@@ -24,12 +24,11 @@ app.set('views', './src/views');
 app.use('/', views);
 app.use('/api', routeMain);
 
-app.use((err, req, res, next) => {
-    const status = err.status || 500;
-    const msg = err.message || 'Internal Server Error';
+app.use((error, req, res, next) => {
+    const status = error.status || 500;
+    const msg = error.message || 'Internal Server Error';
     res.status(status).json({
         msg,
-        stack: err.stack
     })
 });
 

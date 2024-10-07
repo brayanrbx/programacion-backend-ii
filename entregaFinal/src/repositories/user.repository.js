@@ -1,16 +1,20 @@
-import userDao from "../dao/user.dao";
+import UserDao from '../dao/user.dao.js';
 
 class UserRepository {
     async createUser(userData) {
-        return await userDao.save(userData);
+        return await UserDao.save(userData);
     }
 
     async getUserById(id) {
-        return await userDao.findById(id);
+        return await UserDao.findById(id);
     }
 
-    async getUsersByEmail(email) {
-        return await userDao.findOne({ email });
+    async getUserByCartId(id) {
+        return await UserDao.findOne({ cartId: id });
+    }
+
+    async getUserByEmail(email) {
+        return await UserDao.findOne({ email });
     }
 }
 

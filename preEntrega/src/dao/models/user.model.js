@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     first_name: {
@@ -22,13 +22,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    cartId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'carts'
+    },
     role: {
         type: String,
-        enum: ["admin", "user"],
-        default: "user"
+        enum: ['admin', 'user'],
+        default: 'user'
     },
 });
 
-const userModel = mongoose.model("users", userSchema);
+const UserModel = mongoose.model('users', userSchema);
 
-export default userModel;
+export default UserModel;

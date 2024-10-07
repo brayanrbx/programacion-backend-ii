@@ -1,16 +1,16 @@
-import CartModel from "../models/cart.model.js";
+import CartModel from '../models/cart.model.js';
 
 class CartManager {
     async getCartById(id) {
         try {
             const cart = await CartModel.findById(id);
             if (!cart) {
-                console.log("cart not found with that id");
+                console.log('cart not found with that id');
                 return null;
             }
             return cart;
         } catch (error) {
-            console.log("Error to get cart", error);
+            console.log('Error to get cart', error);
             throw error;
         }
     }
@@ -21,7 +21,7 @@ class CartManager {
             await newCart.save();
             return newCart;
         } catch (error) {
-            console.log("Error to add cart", error);
+            console.log('Error to add cart', error);
             throw error;
         }
     }
@@ -35,11 +35,11 @@ class CartManager {
             } else {
                 cart.products.push({ product: pid, quantity });
             }
-            cart.markModified("products");
+            cart.markModified('products');
             await cart.save();
             return cart;
         } catch (error) {
-            console.log("Error to add product to cart", error);
+            console.log('Error to add product to cart', error);
             throw error;
         }
     }
@@ -48,13 +48,13 @@ class CartManager {
         try {
             const arrayCarts = await CartModel.findByIdAndUpdate(id, newData);
             if (!arrayCarts) {
-                console.log("cart not found with that id");
+                console.log('cart not found with that id');
                 return null;
             }
             return arrayCarts;
         }
         catch (error) {
-            console.log("Error to get cart", error);
+            console.log('Error to get cart', error);
             throw error;
         }
     }
@@ -67,11 +67,11 @@ class CartManager {
             if (productExists) {
                 productExists.quantity += quantity;
             }
-            cart.markModified("products");
+            cart.markModified('products');
             await cart.save();
             return cart;
         } catch (error) {
-            console.log("Error to add product to cart", error);
+            console.log('Error to add product to cart', error);
             throw error;
         }
     }
@@ -80,13 +80,13 @@ class CartManager {
         try {
             const arrayCarts = await CartModel.findByIdAndDelete(id);
             if (!arrayCarts) {
-                console.log("cart not found with that id");
+                console.log('cart not found with that id');
                 return null;
             }
             return arrayCarts;
         }
         catch (error) {
-            console.log("Error to get cart", error);
+            console.log('Error to get cart', error);
             throw error;
         }
     }
@@ -95,11 +95,11 @@ class CartManager {
         try {
             const cart = await this.getCartById(cid);
             cart.products = cart.products.filter(product => product.product._id.toString() !== pid);
-            cart.markModified("products");
+            cart.markModified('products');
             await cart.save();
             return cart;
         } catch (error) {
-            console.log("Error to add product to cart", error);
+            console.log('Error to add product to cart', error);
             throw error;
         }
     }

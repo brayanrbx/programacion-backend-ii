@@ -1,0 +1,20 @@
+.form-register, .form-login {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-width: 220px;
+    max-width: 540px;
+    height: 100vh;
+}
+
+.btn-form {
+    width: 120px;
+}
+
+.btn-card {
+    width: 180px;
+}
+
+.col-card {
+    width: 250px;
+}

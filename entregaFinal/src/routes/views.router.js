@@ -7,17 +7,17 @@ const router = Router();
 const productManager = new ProductManager();
 const cartManager = new CartManager();
 
-router.get("/login", async (req, res) => {
-    res.render("login");
+router.get('/login', async (req, res) => {
+    res.render('login');
 });
 
-router.get("/register", async (req, res) => {
-    res.render("register");
+router.get('/register', async (req, res) => {
+    res.render('register');
 });
 
-router.get("/products", async (req, res) => {
+router.get('/products', async (req, res) => {
     try {
-        const { page = 1, limit = 2 } = req.query;
+        const { page = 1, limit = 4 } = req.query;
         const products = await productManager.getProducts({
             page: parseInt(page),
             limit: parseInt(limit)
@@ -28,7 +28,7 @@ router.get("/products", async (req, res) => {
             return rest;
         });
 
-        res.render("products", {
+        res.render('products', {
             products: newArray,
             hasPrevPage: products.hasPrevPage,
             hasNextPage: products.hasNextPage,
@@ -39,23 +39,23 @@ router.get("/products", async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Error to get products", error);
+        console.error('Error to get products', error);
         res.status(500).json({
             status: 'error',
-            error: "Internal server error"
+            error: 'Internal server error'
         });
     }
 });
 
-router.get("/carts/:cid", async (req, res) => {
+router.get('/carts/:cid', async (req, res) => {
     const cartId = req.params.cid;
 
     try {
         const cart = await cartManager.getCartById(cartId);
 
         if (!cart) {
-            console.log("cart not found with that id");
-            return res.status(404).json({ error: "Cart not found" });
+            console.log('cart not found with that id');
+            return res.status(404).json({ error: 'Cart not found' });
         }
 
         const cartProducts = cart.products.map(item => ({
@@ -65,20 +65,24 @@ router.get("/carts/:cid", async (req, res) => {
         }));
 
 
-        res.render("carts", { products: cartProducts });
+        res.render('carts', { products: cartProducts });
     } catch (error) {
-        console.error("Error to get cart", error);
-        res.status(500).json({ error: "Internal server error" });
+        console.error('Error to get cart', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 
 router.get('/', async (req, res) => {
     const products = await productManager.getProducts();
-    res.render('home', { products });
+    const newArray = products.docs.map(product => {
+        const { _id, ...rest } = product.toObject();
+        return rest;
+    });
+    res.render('home', { newArray });
 });
 
-// router.get('/realtimeproducts', async (req, res) => {
-//     res.render('realtimeproducts');
-// });
+router.get('/realtimeproducts', async (req, res) => {
+    res.render('realtimeproducts');
+});
 
 export default router;

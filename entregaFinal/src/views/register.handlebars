@@ -1,18 +1,29 @@
-<form action="/api/sessions/register" method="POST">
-    <label for="first_name">First Name: </label>
-    <input type="text" name="first_name" required>
 
-    <label for="last_name"> Last Name: </label>
-    <input type="text" name="last_name" required>
-
-    <label for="email"> Email: </label>
-    <input type="email" name="email" required>
-
-    <label for="password"> Password: </label>
-    <input type="text" name="password" required>
-
-    <label for="age">Age: </label>
-    <input type="number" name="age" required>
-
-    <button type="submit"> Register </button>
+<form class="container-fluid form-register p-2" action="/api/sessions/register" method="POST">
+    <fieldset class="grid w-100 p-2">
+        <legend class="text-center m-2 p-2">Register</legend>
+        <div class="form-floating m2 p-2">
+            <input type="text" name="first_name" class="form-control" id="txtfirst_name" placeholder="First Name" required>
+            <label for="first_name">First Name: </label>
+        </div>
+        <div class="form-floating m2 p-2">
+            <input type="text" name="last_name" class="form-control" id="txtlast_name" placeholder="Password"required>
+            <label for="last_name"> Last Name: </label>
+        </div>
+        <div class="form-floating m2 p-2">
+            <input type="email" name="email" class="form-control" id="txtemail" placeholder="Password" required>
+            <label for="email"> Email: </label>
+        </div>
+        <div class="form-floating m2 p-2">
+            <input type="password" name="password" class="form-control" id="pwdpassword" placeholder="Password" required>
+            <label for="password"> Password: </label>
+        </div>
+        <div class="form-floating m2 p-2">
+            <input type="number" name="age" class="form-control" id="numage" placeholder="Password" required>
+            <label for="age">Age: </label>
+        </div>
+        <div class="text-center m-2 p-2">
+            <button type="submit" class="btn btn-primary btn-md btn-form m2 p-2"> Register </button>
+        </div>
+    </fieldset>
 </form>

@@ -1,9 +1,16 @@
-<form action="/api/sessions/login" method="POST">
-    <label for="email"> Email: </label>
-    <input type="email" required name="email">
-
-    <label for="password"> Password: </label>
-    <input type="text" name="password" required>
-
-    <button class="btn" type="submit"> Login </button>
+<form class="container-fluid form-register p-2" action="/api/sessions/login" method="POST">
+    <fieldset class="grid w-100 p-2">
+        <legend class="text-center m-2 p-2">Login</legend>
+        <div class="form-floating m2 p-2">
+            <input type="email" name="user" class="form-control" id="txtemail" placeholder="Password" required>
+            <label for="user"> Email: </label>
+        </div>
+        <div class="form-floating m2 p-2">
+            <input type="password" name="password" class="form-control" id="pwdpassword" placeholder="Password" required>
+            <label for="password"> Password: </label>
+        </div>
+        <div class="text-center m-2 p-2">
+            <button type="submit" class="btn btn-primary btn-md btn-form m2 p-2"> Login </button>
+        </div>
+    </fieldset>
 </form>
